@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shake Counter</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #counter {
+        font-size: 2em;
+        margin-top: 50px;
+    }
+</style>
+</head>
+<body>
+<h1>Shake Counter</h1>
+<p>Shake your phone to increase the counter!</p>
+<div id="counter">0</div>
+
+<script>
+    let count = 0;
+
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientation', function(event) {
+            if (event.alpha !== null && event.beta !== null && event.gamma !== null) {
+                if (Math.abs(event.alpha) > 20 || Math.abs(event.beta) > 20 || Math.abs(event.gamma) > 20) {
+                    count++;
+                    document.getElementById('counter').innerText = count;
+                }
+            }
+        }, false);
+    } else {
+        console.log("Device orientation not supported.");
+    }
+</script>
+</body>
+</html>
